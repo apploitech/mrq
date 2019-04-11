@@ -13,6 +13,11 @@ if "GEVENT_RESOLVER" not in os.environ and not is_pypy:
 from gevent import monkey
 monkey.patch_all()
 
+env = os.environ['APPLOI_ENV']
+if env:
+    import newrelic.agent
+    newrelic.agent.initialize('newrelic.ini', env)
+
 import tempfile
 import signal
 import psutil
